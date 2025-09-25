@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/livewire-starter-kit',
-        'pretty_version' => 'dev-components',
-        'version' => 'dev-components',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '6ea63a5fa2166f4c0f3bbde305b7df916f543bde',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -392,9 +392,9 @@
             'dev_requirement' => false,
         ),
         'laravel/livewire-starter-kit' => array(
-            'pretty_version' => 'dev-components',
-            'version' => 'dev-components',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '6ea63a5fa2166f4c0f3bbde305b7df916f543bde',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
