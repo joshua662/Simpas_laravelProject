@@ -16,3 +16,11 @@ Route::get('/aboutus', function(){
 Route::get('/homePage', function(){
     return view ('homePage');
 });
+
+Route::get('/contactus', function(){
+    return view ('contactus');
+});
+
+Route::get('/myservice', function(){
+    return view ('myservice');
+});
