@@ -6,10 +6,10 @@
     <title>My Service</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white antialiased min-h-screen flec items-center justify-center">
+<body class="bg-gray-900 text-white antialiased min-h-screen flex items-center justify-center">
 <main class="max-w-6xl mx-auto px-6 py-12 md:flex md:items-center md:gap12" role="main" aria-label="Services">
   <section class="max-w-5xl mx-auto py-16 px-6">
-    <h2 class="text-3xl font-extrabold mb-6 items-center">Services — Full Stack Development</h2>
+    <h2 class="text-3xl font-extrabold mb-6 text-center">Services — Full Stack Development</h2>
 
     <div class="grid gap-6 sm:grid-cols-2">
       <article class="p-6 bg-gray-800 rounded-lg border border-gray-700">
