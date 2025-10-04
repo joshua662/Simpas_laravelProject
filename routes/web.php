@@ -24,3 +24,4 @@ Route::get('/contactus', function(){
 Route::get('/myservice', function(){
     return view ('myservice');
 });
+
