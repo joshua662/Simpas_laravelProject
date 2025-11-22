@@ -9,6 +9,12 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'student_id';
+    
+    public $incrementing = true;
+    
+    protected $keyType = 'int';
+
     protected $fillable = [
         'name',
         'email',
