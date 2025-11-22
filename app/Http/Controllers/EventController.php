@@ -13,7 +13,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::with('tasks')->latest()->get();
+        $events = Event::with('tasks')->latest()->paginate(5);
         $totalEvents = Event::count();
         
         // Use the new Task model methods

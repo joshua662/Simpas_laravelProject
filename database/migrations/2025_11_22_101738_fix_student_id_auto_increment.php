@@ -12,8 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Modify student_id to be auto-incrementing
-        DB::statement('ALTER TABLE `students` MODIFY `student_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT');
+        // Check if students table exists and has student_id column
+        if (Schema::hasTable('students')) {
+            $columns = Schema::getColumnListing('students');
+            if (in_array('student_id', $columns)) {
+                // Modify student_id to be auto-incrementing
+                DB::statement('ALTER TABLE `students` MODIFY `student_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT');
+            }
+            // If using 'id' instead of 'student_id', the table is already correct
+        }
     }
 
     /**

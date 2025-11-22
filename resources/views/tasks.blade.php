@@ -7,27 +7,27 @@
         <div id="toastContainer" class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"></div>
 
         @if(session('success'))
-            <div id="successToast" class="toast-notification fixed left-1/2 top-1/2 z-50 animate-pop-in pointer-events-auto w-full max-w-md mx-4">
-                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 p-6 shadow-2xl shadow-green-500/50">
+            <div id="successToast" class="toast-notification fixed left-1/2 top-1/2 z-50 animate-pop-in pointer-events-auto w-[calc(100%-2rem)] max-w-md mx-4 sm:mx-auto">
+                <div class="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 p-4 sm:p-6 shadow-2xl shadow-green-500/50">
                     <!-- Animated Background Circles -->
-                    <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
-                    <div class="absolute bottom-0 left-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-white/5"></div>
+                    <div class="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 -translate-y-6 sm:-translate-y-8 translate-x-6 sm:translate-x-8 rounded-full bg-white/10"></div>
+                    <div class="absolute bottom-0 left-0 h-16 w-16 sm:h-24 sm:w-24 translate-y-4 sm:translate-y-6 -translate-x-4 sm:-translate-x-6 rounded-full bg-white/5"></div>
                     
                     <div class="relative z-10">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-4">
-                                <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md shadow-lg">
-                                    <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center justify-between gap-2 sm:gap-4">
+                            <div class="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                                <div class="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-xl sm:rounded-2xl bg-white/20 backdrop-blur-md shadow-lg flex-shrink-0">
+                                    <svg class="h-6 w-6 sm:h-10 sm:w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <div class="flex-1">
-                                    <h3 class="text-2xl font-bold text-white">Success!</h3>
-                                    <p class="mt-1 text-base text-green-50">{{ session('success') }}</p>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-lg sm:text-2xl font-bold text-white">Success!</h3>
+                                    <p class="mt-1 text-sm sm:text-base text-green-50 break-words">{{ session('success') }}</p>
                                 </div>
                             </div>
-                            <button onclick="closeToast('successToast')" class="ml-4 rounded-xl bg-white/20 p-2 text-white transition-all hover:bg-white/30 hover:scale-110">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button onclick="closeToast('successToast')" class="rounded-xl bg-white/20 p-2 sm:p-2.5 text-white transition-all hover:bg-white/30 active:bg-white/40 active:scale-95 touch-manipulation flex-shrink-0" aria-label="Close notification">
+                                <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
@@ -38,27 +38,27 @@
         @endif
 
         @if(session('error'))
-            <div id="errorToast" class="toast-notification fixed left-1/2 top-1/2 z-50 animate-pop-in pointer-events-auto w-full max-w-md mx-4">
-                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-500 via-rose-500 to-pink-500 p-6 shadow-2xl shadow-red-500/50">
+            <div id="errorToast" class="toast-notification fixed left-1/2 top-1/2 z-50 animate-pop-in pointer-events-auto w-[calc(100%-2rem)] max-w-md mx-4 sm:mx-auto">
+                <div class="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-red-500 via-rose-500 to-pink-500 p-4 sm:p-6 shadow-2xl shadow-red-500/50">
                     <!-- Animated Background Circles -->
-                    <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
-                    <div class="absolute bottom-0 left-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-white/5"></div>
+                    <div class="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 -translate-y-6 sm:-translate-y-8 translate-x-6 sm:translate-x-8 rounded-full bg-white/10"></div>
+                    <div class="absolute bottom-0 left-0 h-16 w-16 sm:h-24 sm:w-24 translate-y-4 sm:translate-y-6 -translate-x-4 sm:-translate-x-6 rounded-full bg-white/5"></div>
                     
                     <div class="relative z-10">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-4">
-                                <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md shadow-lg">
-                                    <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center justify-between gap-2 sm:gap-4">
+                            <div class="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                                <div class="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-xl sm:rounded-2xl bg-white/20 backdrop-blur-md shadow-lg flex-shrink-0">
+                                    <svg class="h-6 w-6 sm:h-10 sm:w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </div>
-                                <div class="flex-1">
-                                    <h3 class="text-2xl font-bold text-white">Error!</h3>
-                                    <p class="mt-1 text-base text-red-50">{{ session('error') }}</p>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-lg sm:text-2xl font-bold text-white">Error!</h3>
+                                    <p class="mt-1 text-sm sm:text-base text-red-50 break-words">{{ session('error') }}</p>
                                 </div>
                             </div>
-                            <button onclick="closeToast('errorToast')" class="ml-4 rounded-xl bg-white/20 p-2 text-white transition-all hover:bg-white/30 hover:scale-110">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button onclick="closeToast('errorToast')" class="rounded-xl bg-white/20 p-2 sm:p-2.5 text-white transition-all hover:bg-white/30 active:bg-white/40 active:scale-95 touch-manipulation flex-shrink-0" aria-label="Close notification">
+                                <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
@@ -226,6 +226,92 @@
                     </tbody>
                 </table>
             </div>
+            <!-- Pagination -->
+            @if($tasks->hasPages())
+                <div class="border-t border-slate-200/50 p-4 sm:p-6 dark:border-slate-700/50">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 text-center sm:text-left">
+                            Showing <span class="font-semibold text-slate-900 dark:text-white">{{ $tasks->firstItem() }}</span> to 
+                            <span class="font-semibold text-slate-900 dark:text-white">{{ $tasks->lastItem() }}</span> of 
+                            <span class="font-semibold text-slate-900 dark:text-white">{{ $tasks->total() }}</span> tasks
+                        </div>
+                        <div class="flex items-center gap-1 sm:gap-2 flex-wrap justify-center">
+                            @if ($tasks->onFirstPage())
+                                <span class="flex items-center justify-center rounded-lg border border-slate-300 bg-slate-100 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-400 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-500 cursor-not-allowed">
+                                    <svg class="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    <span class="hidden sm:inline">Previous</span>
+                                    <span class="sm:hidden">Prev</span>
+                                </span>
+                            @else
+                                <a href="{{ $tasks->previousPageUrl() }}" class="flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 transition-all hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-blue-900/20 dark:hover:border-blue-500 dark:hover:text-blue-300">
+                                    <svg class="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    <span class="hidden sm:inline">Previous</span>
+                                    <span class="sm:hidden">Prev</span>
+                                </a>
+                            @endif
+
+                            @php
+                                $currentPage = $tasks->currentPage();
+                                $lastPage = $tasks->lastPage();
+                                $startPage = max(1, $currentPage - 2);
+                                $endPage = min($lastPage, $currentPage + 2);
+                            @endphp
+
+                            @if($startPage > 1)
+                                <a href="{{ $tasks->url(1) }}" class="flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-all hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-blue-900/20 dark:hover:border-blue-500 dark:hover:text-blue-300">
+                                    1
+                                </a>
+                                @if($startPage > 2)
+                                    <span class="px-2 text-slate-400">...</span>
+                                @endif
+                            @endif
+
+                            @foreach ($tasks->getUrlRange($startPage, $endPage) as $page => $url)
+                                @if ($page == $currentPage)
+                                    <span class="flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-blue-500/50">
+                                        {{ $page }}
+                                    </span>
+                                @else
+                                    <a href="{{ $url }}" class="flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 transition-all hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-blue-900/20 dark:hover:border-blue-500 dark:hover:text-blue-300">
+                                        {{ $page }}
+                                    </a>
+                                @endif
+                            @endforeach
+
+                            @if($endPage < $lastPage)
+                                @if($endPage < $lastPage - 1)
+                                    <span class="px-2 text-slate-400">...</span>
+                                @endif
+                                <a href="{{ $tasks->url($lastPage) }}" class="flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-all hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-blue-900/20 dark:hover:border-blue-500 dark:hover:text-blue-300">
+                                    {{ $lastPage }}
+                                </a>
+                            @endif
+
+                            @if ($tasks->hasMorePages())
+                                <a href="{{ $tasks->nextPageUrl() }}" class="flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 transition-all hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-blue-900/20 dark:hover:border-blue-500 dark:hover:text-blue-300">
+                                    <span class="hidden sm:inline">Next</span>
+                                    <span class="sm:hidden">Next</span>
+                                    <svg class="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            @else
+                                <span class="flex items-center justify-center rounded-lg border border-slate-300 bg-slate-100 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-400 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-500 cursor-not-allowed">
+                                    <span class="hidden sm:inline">Next</span>
+                                    <span class="sm:hidden">Next</span>
+                                    <svg class="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -420,6 +506,19 @@
 
         .animate-pop-out {
             animation: pop-out 0.3s ease-in forwards;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .toast-notification {
+                max-width: calc(100vw - 2rem);
+            }
+        }
+
+        /* Touch-friendly interactions */
+        .touch-manipulation {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
     </style>
