@@ -34,7 +34,8 @@ class EventController extends Controller
         $cancelledEvents = Event::where('status', 'cancelled')->count();
         
         // Upcoming events (next 7 days)
-        $upcomingEvents = Event::where('date', '>=', now())
+        $upcomingEvents = Event::whereNotNull('date')
+            ->where('date', '>=', now())
             ->where('date', '<=', now()->addDays(7))
             ->orderBy('date', 'asc')
             ->take(5)

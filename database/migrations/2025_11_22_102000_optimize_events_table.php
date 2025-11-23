@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('events', function (Blueprint $table) {
             // Add indexes for better query performance
             $table->index('status');
-            $table->index('date');
             $table->index('created_at');
         });
     }
@@ -26,7 +25,6 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             $table->dropIndex(['status']);
-            $table->dropIndex(['date']);
             $table->dropIndex(['created_at']);
         });
     }

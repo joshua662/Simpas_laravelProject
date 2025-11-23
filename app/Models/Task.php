@@ -27,14 +27,6 @@ class Task extends Model
     }
 
     /**
-     * Get the count of events for this task (should be 0 or 1)
-     */
-    public function getEventCountAttribute(): int
-    {
-        return $this->event_id ? 1 : 0;
-    }
-
-    /**
      * Get the count of active tasks (due date is today or in the future)
      * 
      * @return int
@@ -108,5 +100,13 @@ class Task extends Model
             ->where('due_date', '>=', now()->startOfDay())
             ->orderBy('due_date', 'asc')
             ->get();
+    }
+
+    /**
+     * Get the count of events for this task (should be 0 or 1)
+     */
+    public function getEventCountAttribute(): int
+    {
+        return $this->event_id ? 1 : 0;
     }
 }

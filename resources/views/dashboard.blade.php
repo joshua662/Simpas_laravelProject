@@ -257,7 +257,7 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex-1">
                                     <p class="font-semibold text-slate-900 dark:text-white">{{ $event->title }}</p>
-                                    <p class="mt-1 text-xs text-slate-600 dark:text-slate-400">{{ $event->date->format('M d, Y') }} • {{ $event->location }}</p>
+                                    <p class="mt-1 text-xs text-slate-600 dark:text-slate-400">{{ $event->date ? $event->date->format('M d, Y') : 'No date' }} • {{ $event->location ?? 'No location' }}</p>
                                 </div>
                                 <div class="ml-3">
                                     @php
@@ -396,7 +396,7 @@
                                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    {{ $event->date->format('M d, Y') }}
+                                    {{ $event->date ? $event->date->format('M d, Y') : 'N/A' }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
@@ -418,7 +418,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <button onclick="openEditModal({{ $event->id }}, '{{ addslashes($event->title) }}', '{{ $event->status }}', '{{ $event->date->format('Y-m-d') }}', '{{ addslashes($event->location) }}')" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
+                                    <button onclick="openEditModal({{ $event->id }}, '{{ addslashes($event->title) }}', '{{ $event->status }}', '{{ $event->date ? $event->date->format('Y-m-d') : '' }}', '{{ addslashes($event->location ?? '') }}')" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
                                         <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
@@ -637,18 +637,6 @@
                                     <div class="flex-1">
                                         <p class="font-semibold text-slate-900 dark:text-white">{{ $task->description }}</p>
                                         <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
-                                                {{ $task->assigned_to }}
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                {{ $task->due_date->format('M d, Y') }}
-                                            </span>
                                             @if($task->event)
                                                 <span class="flex items-center gap-1 rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                     {{ $task->event->title }}
@@ -707,18 +695,6 @@
                                             <p class="font-semibold text-slate-900 dark:text-white">{{ $task->description }}</p>
                                         </div>
                                         <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
-                                                {{ $task->assigned_to }}
-                                            </span>
-                                            <span class="flex items-center gap-1">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                Completed: {{ $task->due_date->format('M d, Y') }}
-                                            </span>
                                             @if($task->event)
                                                 <span class="flex items-center gap-1 rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                     {{ $task->event->title }}
@@ -773,18 +749,6 @@
                                             <p class="font-semibold text-slate-900 dark:text-white">{{ $task->description }}</p>
                                         </div>
                                         <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
-                                            <span class="flex items-center gap-1">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
-                                                {{ $task->assigned_to }}
-                                            </span>
-                                            <span class="flex items-center gap-1 font-semibold text-red-600 dark:text-red-400">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                Overdue: {{ $task->due_date->format('M d, Y') }}
-                                            </span>
                                             @if($task->event)
                                                 <span class="flex items-center gap-1 rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                                                     {{ $task->event->title }}

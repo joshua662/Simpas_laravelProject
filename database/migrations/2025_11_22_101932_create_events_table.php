@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->enum('status', ['pending', 'in_progress', 'completed', 'cancelled'])->default('pending');
-            $table->date('date');
-            $table->string('location');
+            $table->string('name');
+            $table->string('status');
             $table->timestamps();
         });
     }

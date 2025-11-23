@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
-            $table->string('assigned_to');
-            $table->date('due_date');
-            $table->foreignId('event_id')->nullable()->constrained('events')->onDelete('set null');
+            $table->string('title');
+            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
             $table->timestamps();
         });
     }

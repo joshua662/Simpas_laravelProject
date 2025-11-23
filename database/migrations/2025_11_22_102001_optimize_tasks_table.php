@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::table('tasks', function (Blueprint $table) {
             // Add indexes for better query performance
             $table->index('event_id');
-            $table->index('due_date');
-            $table->index('assigned_to');
             $table->index('created_at');
         });
     }
@@ -27,8 +25,6 @@ return new class extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->dropIndex(['event_id']);
-            $table->dropIndex(['due_date']);
-            $table->dropIndex(['assigned_to']);
             $table->dropIndex(['created_at']);
         });
     }
