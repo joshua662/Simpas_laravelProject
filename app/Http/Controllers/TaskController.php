@@ -31,6 +31,11 @@ class TaskController extends Controller
             'event_id' => 'nullable|exists:events,id',
         ]);
 
+        // Set title from description (truncate if too long for title field)
+        $validated['title'] = strlen($validated['description']) > 255 
+            ? substr($validated['description'], 0, 252) . '...' 
+            : $validated['description'];
+
         Task::create($validated);
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
@@ -47,6 +52,11 @@ class TaskController extends Controller
             'due_date' => 'required|date',
             'event_id' => 'nullable|exists:events,id',
         ]);
+
+        // Set title from description (truncate if too long for title field)
+        $validated['title'] = strlen($validated['description']) > 255 
+            ? substr($validated['description'], 0, 252) . '...' 
+            : $validated['description'];
 
         $task->update($validated);
 

@@ -19,13 +19,9 @@ class EventController extends Controller
         // Use the new Task model methods
         $totalTasks = Task::count();
         $activeTasks = Task::getActiveTasksCount();
-        $completionRate = Task::getCompletionRate($totalTasks);
-        $overdueTasks = Task::getOverdueTasksCount(true);
         
         // Get actual task lists for modals
         $activeTasksList = Task::getActiveTasks();
-        $overdueTasksList = Task::getOverdueTasks(true);
-        $completedTasksList = Task::where('due_date', '<', now()->startOfDay())->with('event')->orderBy('due_date', 'desc')->get();
         
         // Additional statistics
         $pendingEvents = Event::where('status', 'pending')->count();
@@ -52,20 +48,16 @@ class EventController extends Controller
             'events', 
             'totalEvents', 
             'activeTasks', 
-            'completionRate',
             'pendingEvents',
             'inProgressEvents',
             'completedEvents',
             'cancelledEvents',
             'upcomingEvents',
             'recentEvents',
-            'overdueTasks',
             'tasksWithEvents',
             'tasksWithoutEvents',
             'totalTasks',
-            'activeTasksList',
-            'overdueTasksList',
-            'completedTasksList'
+            'activeTasksList'
         ));
     }
 

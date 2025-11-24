@@ -119,25 +119,25 @@
                 </div>
             </button>
 
-            <!-- Completion Rate Card -->
-            <button onclick="openCompletionRateModal()" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-br from-purple-500 via-pink-600 to-rose-600 p-6 text-left shadow-xl shadow-purple-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/40 cursor-pointer">
+            <!-- In Progress Events Card -->
+            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 p-6 shadow-xl shadow-indigo-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/40">
                 <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
                         <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm">
                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                     </div>
-                    <p class="mb-1 text-sm font-medium text-purple-100">Completion Rate</p>
-                    <h3 class="text-4xl font-bold text-white">{{ $completionRate }}%</h3>
-                    <p class="mt-2 text-xs text-purple-100">Click to view completed tasks</p>
+                    <p class="mb-1 text-sm font-medium text-indigo-100">In Progress Events</p>
+                    <h3 class="text-4xl font-bold text-white">{{ $inProgressEvents }}</h3>
+                    <p class="mt-2 text-xs text-indigo-100">Currently active events</p>
                 </div>
-            </button>
+            </div>
 
-            <!-- Overdue Tasks Card -->
-            <button onclick="openOverdueTasksModal()" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 via-red-600 to-rose-600 p-6 text-left shadow-xl shadow-orange-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/40 cursor-pointer">
+            <!-- Pending Events Card -->
+            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500 via-orange-600 to-yellow-600 p-6 shadow-xl shadow-amber-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/40">
                 <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
@@ -147,11 +147,11 @@
                             </svg>
                         </div>
                     </div>
-                    <p class="mb-1 text-sm font-medium text-orange-100">Overdue Tasks</p>
-                    <h3 class="text-4xl font-bold text-white">{{ $overdueTasks }}</h3>
-                    <p class="mt-2 text-xs text-orange-100">Click to view details</p>
+                    <p class="mb-1 text-sm font-medium text-amber-100">Pending Events</p>
+                    <h3 class="text-4xl font-bold text-white">{{ $pendingEvents }}</h3>
+                    <p class="mt-2 text-xs text-amber-100">Awaiting start</p>
                 </div>
-            </button>
+            </div>
         </div>
 
         <!-- Status Breakdown & Quick Stats -->
@@ -665,117 +665,6 @@
         </div>
     </div>
 
-    <!-- Completion Rate Modal -->
-    <div id="completionRateModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
-        <div class="relative w-full max-w-3xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-slate-800">
-            <div class="border-b border-slate-200/50 bg-gradient-to-r from-purple-500 to-pink-600 p-6 dark:border-slate-700/50">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-2xl font-bold text-white">Completed Tasks</h3>
-                        <p class="mt-1 text-sm text-purple-100">Completion Rate: {{ $completionRate }}%</p>
-                    </div>
-                    <button onclick="closeCompletionRateModal()" class="rounded-lg bg-white/20 p-2 text-white transition-all hover:bg-white/30">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="max-h-[60vh] overflow-y-auto p-6">
-                @if($completedTasksList->count() > 0)
-                    <div class="space-y-3">
-                        @foreach($completedTasksList as $task)
-                            <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-all hover:border-purple-300 hover:bg-purple-50 dark:border-slate-700 dark:bg-slate-700/50 dark:hover:border-purple-600 dark:hover:bg-purple-900/20">
-                                <div class="flex items-start justify-between">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2">
-                                            <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <p class="font-semibold text-slate-900 dark:text-white">{{ $task->description }}</p>
-                                        </div>
-                                        <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
-                                            @if($task->event)
-                                                <span class="flex items-center gap-1 rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
-                                                    {{ $task->event->title }}
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <div class="py-12 text-center">
-                        <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                        <p class="mt-4 text-sm font-medium text-slate-900 dark:text-white">No completed tasks</p>
-                        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Complete tasks to see them here</p>
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-
-    <!-- Overdue Tasks Modal -->
-    <div id="overdueTasksModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
-        <div class="relative w-full max-w-3xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-slate-800">
-            <div class="border-b border-slate-200/50 bg-gradient-to-r from-orange-500 to-red-600 p-6 dark:border-slate-700/50">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-2xl font-bold text-white">Overdue Tasks</h3>
-                        <p class="mt-1 text-sm text-orange-100">Tasks that require immediate attention</p>
-                    </div>
-                    <button onclick="closeOverdueTasksModal()" class="rounded-lg bg-white/20 p-2 text-white transition-all hover:bg-white/30">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="max-h-[60vh] overflow-y-auto p-6">
-                @if($overdueTasksList->count() > 0)
-                    <div class="space-y-3">
-                        @foreach($overdueTasksList as $task)
-                            <div class="rounded-xl border border-red-200 bg-red-50 p-4 transition-all hover:border-red-300 hover:bg-red-100 dark:border-red-900/50 dark:bg-red-900/20 dark:hover:bg-red-900/30">
-                                <div class="flex items-start justify-between">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2">
-                                            <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <p class="font-semibold text-slate-900 dark:text-white">{{ $task->description }}</p>
-                                        </div>
-                                        <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
-                                            @if($task->event)
-                                                <span class="flex items-center gap-1 rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
-                                                    {{ $task->event->title }}
-                                                </span>
-                                            @else
-                                                <span class="flex items-center gap-1 rounded-full bg-slate-200 px-2 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-600 dark:text-slate-400">
-                                                    Unassigned
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <div class="py-12 text-center">
-                        <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p class="mt-4 text-sm font-medium text-slate-900 dark:text-white">No overdue tasks</p>
-                        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Great job! All tasks are on schedule</p>
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
 
     <script>
         function openEditModal(id, title, status, date, location) {
@@ -816,39 +705,6 @@
             }
         });
 
-        // Completion Rate Modal Functions
-        function openCompletionRateModal() {
-            document.getElementById('completionRateModal').classList.remove('hidden');
-            document.getElementById('completionRateModal').classList.add('flex');
-        }
-
-        function closeCompletionRateModal() {
-            document.getElementById('completionRateModal').classList.add('hidden');
-            document.getElementById('completionRateModal').classList.remove('flex');
-        }
-
-        document.getElementById('completionRateModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeCompletionRateModal();
-            }
-        });
-
-        // Overdue Tasks Modal Functions
-        function openOverdueTasksModal() {
-            document.getElementById('overdueTasksModal').classList.remove('hidden');
-            document.getElementById('overdueTasksModal').classList.add('flex');
-        }
-
-        function closeOverdueTasksModal() {
-            document.getElementById('overdueTasksModal').classList.add('hidden');
-            document.getElementById('overdueTasksModal').classList.remove('flex');
-        }
-
-        document.getElementById('overdueTasksModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeOverdueTasksModal();
-            }
-        });
 
         // Toast Notification Functions
         function closeToast(toastId) {

@@ -53,6 +53,7 @@ class EventTaskSeeder extends Seeder
 
         // Create Tasks with relationships
         Task::create([
+            'title' => 'Prepare presentation slides for keynote',
             'description' => 'Prepare presentation slides for keynote',
             'assigned_to' => 'John Doe',
             'due_date' => Carbon::now()->addDays(25),
@@ -60,6 +61,7 @@ class EventTaskSeeder extends Seeder
         ]);
 
         Task::create([
+            'title' => 'Book venue and catering services',
             'description' => 'Book venue and catering services',
             'assigned_to' => 'Jane Smith',
             'due_date' => Carbon::now()->addDays(20),
@@ -67,6 +69,7 @@ class EventTaskSeeder extends Seeder
         ]);
 
         Task::create([
+            'title' => 'Send invitations to all attendees',
             'description' => 'Send invitations to all attendees',
             'assigned_to' => 'Mike Johnson',
             'due_date' => Carbon::now()->addDays(10),
@@ -74,6 +77,7 @@ class EventTaskSeeder extends Seeder
         ]);
 
         Task::create([
+            'title' => 'Finalize product demo script',
             'description' => 'Finalize product demo script',
             'assigned_to' => 'Sarah Williams',
             'due_date' => Carbon::now()->addDays(40),
@@ -81,6 +85,7 @@ class EventTaskSeeder extends Seeder
         ]);
 
         Task::create([
+            'title' => 'Coordinate with marketing team',
             'description' => 'Coordinate with marketing team',
             'assigned_to' => 'David Brown',
             'due_date' => Carbon::now()->addDays(35),
@@ -88,6 +93,7 @@ class EventTaskSeeder extends Seeder
         ]);
 
         Task::create([
+            'title' => 'Prepare meeting agenda',
             'description' => 'Prepare meeting agenda',
             'assigned_to' => 'Emily Davis',
             'due_date' => Carbon::now()->addDays(12),
@@ -96,6 +102,7 @@ class EventTaskSeeder extends Seeder
 
         // Create unassigned tasks (no event_id)
         Task::create([
+            'title' => 'Update company website',
             'description' => 'Update company website',
             'assigned_to' => 'Tom Wilson',
             'due_date' => Carbon::now()->addDays(7),
@@ -103,6 +110,7 @@ class EventTaskSeeder extends Seeder
         ]);
 
         Task::create([
+            'title' => 'Review quarterly reports',
             'description' => 'Review quarterly reports',
             'assigned_to' => 'Lisa Anderson',
             'due_date' => Carbon::now()->addDays(5),
@@ -110,6 +118,7 @@ class EventTaskSeeder extends Seeder
         ]);
 
         Task::create([
+            'title' => 'Organize team lunch',
             'description' => 'Organize team lunch',
             'assigned_to' => 'Robert Taylor',
             'due_date' => Carbon::now()->addDays(3),
