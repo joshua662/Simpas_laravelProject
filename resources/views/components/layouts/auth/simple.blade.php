@@ -8,7 +8,7 @@
             }
         </style>
     </head>
-    <body class="min-h-screen antialiased bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <body class="min-h-screen antialiased" style="background: linear-gradient(to bottom right, #141E30, #35577D);">
         <!-- Animated Background Elements -->
         <div class="fixed inset-0 overflow-hidden pointer-events-none">
             <div class="absolute top-20 left-10 w-72 h-72 bg-blue-300/30 dark:bg-blue-500/20 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob"></div>
@@ -20,12 +20,12 @@
             <div class="w-full max-w-md">
                 <div class="relative overflow-hidden rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 p-8 md:p-10">
                     <!-- Decorative Background Elements -->
-                    <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-gradient-to-br from-blue-500/10 to-indigo-500/10"></div>
-                    <div class="absolute bottom-0 left-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10"></div>
+                    <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-gradient-to-br from-[#141E30]/10 to-[#35577D]/10"></div>
+                    <div class="absolute bottom-0 left-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-gradient-to-br from-[#141E30]/10 to-[#35577D]/10"></div>
                     
                     <div class="relative z-10 flex w-full mx-auto flex-col gap-6">
                         <a href="{{ route('home') }}" class="flex flex-col items-center gap-3 font-medium group" wire:navigate>
-                            <span class="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform duration-300">
+                            <span class="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30 group-hover:scale-110 transition-transform duration-300">
                                 <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>

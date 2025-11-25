@@ -34,7 +34,9 @@ class Task extends Model
      */
     public static function getActiveTasksCount(): int
     {
-        return self::where('due_date', '>=', now()->startOfDay())->count();
+        return self::whereNotNull('due_date')
+            ->where('due_date', '>=', now()->startOfDay())
+            ->count();
     }
 
     /**
@@ -51,7 +53,9 @@ class Task extends Model
             return 0.0;
         }
 
-        $completedTasks = self::where('due_date', '<', now()->startOfDay())->count();
+        $completedTasks = self::whereNotNull('due_date')
+            ->where('due_date', '<', now()->startOfDay())
+            ->count();
         
         return round(($completedTasks / $total) * 100, 1);
     }
@@ -64,7 +68,8 @@ class Task extends Model
      */
     public static function getOverdueTasksCount(bool $unassignedOnly = false): int
     {
-        $query = self::where('due_date', '<', now()->startOfDay());
+        $query = self::whereNotNull('due_date')
+            ->where('due_date', '<', now()->startOfDay());
         
         if ($unassignedOnly) {
             $query->whereNull('event_id');
@@ -81,7 +86,9 @@ class Task extends Model
      */
     public static function getOverdueTasks(bool $unassignedOnly = false)
     {
-        $query = self::with('event')->where('due_date', '<', now()->startOfDay());
+        $query = self::with('event')
+            ->whereNotNull('due_date')
+            ->where('due_date', '<', now()->startOfDay());
         
         if ($unassignedOnly) {
             $query->whereNull('event_id');
@@ -98,6 +105,7 @@ class Task extends Model
     public static function getActiveTasks()
     {
         return self::with('event')
+            ->whereNotNull('due_date')
             ->where('due_date', '>=', now()->startOfDay())
             ->orderBy('due_date', 'asc')
             ->get();

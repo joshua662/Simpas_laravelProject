@@ -11,13 +11,13 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 antialiased">
+    <body class="min-h-screen antialiased" style="background: linear-gradient(to bottom right, #141E30, #35577D);">
         <!-- Navigation -->
         <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 shadow-sm">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center gap-3">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 shadow-lg shadow-blue-500/30">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30">
                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="flex items-center gap-4">
                         @auth
-                            <a href="{{ route('dashboard') }}" class="px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/50 transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60">
+                            <a href="{{ route('dashboard') }}" class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] text-white font-semibold shadow-lg shadow-[#141E30]/50/50 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                                 Dashboard
                             </a>
                         @else
@@ -34,7 +34,7 @@
                                 Log in
                             </a>
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/50 transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60">
+                                <a href="{{ route('register') }}" class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] text-white font-semibold shadow-lg shadow-[#141E30]/50/50 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                                     Get Started
                                 </a>
                             @endif
@@ -63,7 +63,7 @@
                     
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
                         Organize Your
-                        <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">Events & Tasks</span>
+                        <span class="bg-gradient-to-r from-[#141E30] to-[#35577D] bg-clip-text text-transparent">Events & Tasks</span>
                         <br>Like Never Before
                     </h1>
                     <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -72,7 +72,7 @@
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                         @auth
-                            <a href="{{ route('dashboard') }}" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60">
+                            <a href="{{ route('dashboard') }}" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-8 py-4 font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                                 <span class="relative z-10 flex items-center gap-2">
                                     Go to Dashboard
                                     <svg class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@
                                 </span>
                             </a>
                         @else
-                            <a href="{{ route('register') }}" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60">
+                            <a href="{{ route('register') }}" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-8 py-4 font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                                 <span class="relative z-10 flex items-center gap-2">
                                     Get Started Free
                                     <svg class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +99,7 @@
                 <!-- Feature Cards with Dashboard Colors -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
                     <!-- Event Management Card -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 p-8 shadow-xl shadow-blue-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/40">
+                    <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] to-[#35577D] p-8 shadow-xl shadow-[#141E30]/50/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40">
                         <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
                         <div class="relative z-10">
                             <div class="mb-4 flex items-center justify-between">
@@ -147,7 +147,7 @@
                     </div>
 
                     <!-- Real-time Tracking Card -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 p-8 shadow-xl shadow-indigo-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/40">
+                    <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] to-[#35577D] p-8 shadow-xl shadow-[#141E30]/50/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40">
                         <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
                         <div class="relative z-10">
                             <div class="mb-4 flex items-center justify-between">
@@ -174,7 +174,7 @@
                 <!-- Stats Section -->
                 <div class="mt-32 grid md:grid-cols-3 gap-6">
                     <div class="text-center p-6 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50">
-                        <div class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">100%</div>
+                        <div class="text-4xl font-bold bg-gradient-to-r from-[#141E30] to-[#35577D] bg-clip-text text-transparent mb-2">100%</div>
                         <p class="text-slate-600 dark:text-slate-400 font-medium">Uptime Guarantee</p>
                     </div>
                     <div class="text-center p-6 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50">
@@ -182,7 +182,7 @@
                         <p class="text-slate-600 dark:text-slate-400 font-medium">Support Available</p>
                     </div>
                     <div class="text-center p-6 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50">
-                        <div class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">∞</div>
+                        <div class="text-4xl font-bold bg-gradient-to-r from-[#141E30] to-[#35577D] bg-clip-text text-transparent mb-2">∞</div>
                         <p class="text-slate-600 dark:text-slate-400 font-medium">Unlimited Events</p>
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <div class="text-center group">
-                            <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30 mb-4 transition-transform group-hover:scale-110">
+                            <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30 mb-4 transition-transform group-hover:scale-110">
                                 <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                 </svg>
@@ -215,7 +215,7 @@
                             <p class="text-sm text-slate-600 dark:text-slate-400">Lightning-fast performance with modern technology</p>
                         </div>
                         <div class="text-center group">
-                            <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/30 mb-4 transition-transform group-hover:scale-110">
+                            <div class="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30 mb-4 transition-transform group-hover:scale-110">
                                 <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
@@ -242,7 +242,7 @@
             <div class="max-w-7xl mx-auto">
                 <div class="text-center">
                     <div class="flex items-center justify-center gap-3 mb-4">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 shadow-lg shadow-blue-500/30">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30">
                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>

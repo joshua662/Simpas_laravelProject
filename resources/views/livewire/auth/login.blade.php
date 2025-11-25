@@ -67,7 +67,7 @@
             <flux:button 
                 variant="primary" 
                 type="submit" 
-                class="w-full !bg-gradient-to-r !from-blue-500 !via-indigo-600 !to-purple-600 hover:!from-blue-600 hover:!via-indigo-700 hover:!to-purple-700 !text-white !font-semibold !py-3 !rounded-xl !shadow-lg !shadow-blue-500/50 hover:!shadow-xl hover:!shadow-blue-500/60 !transition-all !duration-300 hover:!scale-[1.02] active:!scale-[0.98]"
+                class="w-full !bg-gradient-to-r !from-[#141E30] !to-[#35577D] hover:!from-[#1a2a42] hover:!to-[#3d6589] !text-white !font-semibold !py-3 !rounded-xl !shadow-lg !shadow-[#141E30]/50 hover:!shadow-xl hover:!shadow-[#35577D]/60 !transition-all !duration-300 hover:!scale-[1.02] active:!scale-[0.98]"
             >
                 <span class="flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

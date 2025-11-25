@@ -1,5 +1,5 @@
 <x-layouts.app :title="__('Tasks')">
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6">
+    <div class="min-h-screen p-6" style="background: linear-gradient(to bottom right, #141E30, #35577D);">
         <!-- Toast Notification Backdrop -->
         <div id="toastBackdrop" class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-sm transition-opacity"></div>
 
@@ -118,7 +118,7 @@
                         @enderror
                     </div>
                     <div class="md:col-span-2">
-                        <button type="submit" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 font-semibold text-white shadow-lg shadow-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/60">
+                        <button type="submit" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-8 py-3 font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                             <span class="relative z-10 flex items-center gap-2">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -157,7 +157,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-2">
-                                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-xs font-bold text-white">
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#141E30] to-[#35577D] text-xs font-bold text-white">
                                         {{ strtoupper(substr($task->assigned_to, 0, 1)) }}
                                     </div>
                                     <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ $task->assigned_to }}</span>
@@ -168,7 +168,7 @@
                                     <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    <span class="text-sm text-slate-600 dark:text-slate-400">{{ $task->due_date->format('M d, Y') }}</span>
+                                    <span class="text-sm text-slate-600 dark:text-slate-400">{{ $task->due_date ? $task->due_date->format('M d, Y') : 'N/A' }}</span>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
@@ -195,7 +195,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <button onclick="openEditTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ addslashes($task->assigned_to) }}', '{{ $task->due_date->format('Y-m-d') }}', {{ $task->event_id ?? 'null' }})" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
+                                    <button onclick="openEditTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ addslashes($task->assigned_to) }}', '{{ $task->due_date ? $task->due_date->format('Y-m-d') : '' }}', {{ $task->event_id ?? 'null' }})" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
                                         <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
@@ -272,7 +272,7 @@
 
                             @foreach ($tasks->getUrlRange($startPage, $endPage) as $page => $url)
                                 @if ($page == $currentPage)
-                                    <span class="flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-blue-500/50">
+                                    <span class="flex items-center justify-center rounded-lg bg-gradient-to-r from-[#141E30] to-[#35577D] px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-blue-500/50">
                                         {{ $page }}
                                     </span>
                                 @else
@@ -380,7 +380,7 @@
                     <button type="button" onclick="closeEditTaskModal()" class="rounded-xl border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600">
                         Cancel
                     </button>
-                    <button type="submit" class="rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple-500/50 transition-all hover:shadow-xl hover:shadow-purple-500/60">
+                    <button type="submit" class="rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all hover:shadow-xl hover:shadow-[#141E30]/50/60">
                         Save Changes
                     </button>
                 </div>

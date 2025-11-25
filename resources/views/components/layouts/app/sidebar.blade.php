@@ -13,7 +13,7 @@
             <!-- Logo/Brand Section -->
             <div class="mb-8 px-4 pt-6">
                 <a href="{{ route('dashboard') }}" class="group flex items-center gap-3 rounded-xl p-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-800" wire:navigate>
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 shadow-lg shadow-blue-500/30">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30">
                         <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
@@ -31,7 +31,7 @@
                 $activeTasks = \App\Models\Task::getActiveTasksCount();
             @endphp
             <div class="mb-6 px-4">
-                <div class="rounded-xl bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-purple-500/10 p-4 backdrop-blur-sm dark:from-blue-500/20 dark:via-indigo-500/20 dark:to-purple-500/20">
+                <div class="rounded-xl bg-gradient-to-br from-[#141E30]/10 via-[#35577D]/10 to-[#141E30]/10 p-4 backdrop-blur-sm dark:from-[#141E30]/20 dark:via-[#35577D]/20 dark:to-[#141E30]/20">
                     <div class="mb-3 flex items-center justify-between">
                         <span class="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Quick Stats</span>
                     </div>
@@ -63,7 +63,7 @@
                             :href="route('dashboard')" 
                             :current="request()->routeIs('dashboard')" 
                             wire:navigate
-                            class="group relative rounded-xl px-4 py-3 transition-all hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-900/20 dark:hover:to-indigo-900/20"
+                            class="group relative rounded-xl px-4 py-3 transition-all hover:bg-gradient-to-r hover:from-[#141E30]/20 hover:to-[#35577D]/20 dark:hover:from-[#141E30]/30 dark:hover:to-[#35577D]/30"
                         >
                             <span class="font-medium">{{ __('Dashboard') }}</span>
                         </flux:navlist.item>
@@ -73,7 +73,7 @@
                             :href="route('tasks.index')" 
                             :current="request()->routeIs('tasks.*')" 
                             wire:navigate
-                            class="group relative rounded-xl px-4 py-3 transition-all hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/20 dark:hover:to-pink-900/20"
+                            class="group relative rounded-xl px-4 py-3 transition-all hover:bg-gradient-to-r hover:from-[#141E30]/20 hover:to-[#35577D]/20 dark:hover:from-[#141E30]/30 dark:hover:to-[#35577D]/30"
                         >
                             <span class="font-medium">{{ __('Tasks') }}</span>
                         </flux:navlist.item>
@@ -105,7 +105,7 @@
                 <flux:dropdown class="w-full" position="top" align="start">
                     <button class="flex w-full items-center gap-3 rounded-xl p-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
                         <div class="relative">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-sm font-bold text-white shadow-lg">
+                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] text-sm font-bold text-white shadow-lg">
                                 {{ auth()->user()->initials() }}
                             </div>
                             <div class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-green-500 dark:border-slate-800"></div>
@@ -123,7 +123,7 @@
                         <flux:menu.radio.group>
                             <div class="p-2">
                                 <div class="flex items-center gap-3 rounded-lg bg-slate-50 p-3 dark:bg-slate-800/50">
-                                    <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-sm font-bold text-white">
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#141E30] to-[#35577D] text-sm font-bold text-white">
                                         {{ auth()->user()->initials() }}
                                     </div>
                                     <div class="flex-1">
@@ -166,7 +166,7 @@
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
             <a href="{{ route('dashboard') }}" class="ms-2 flex items-center gap-2" wire:navigate>
-                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#141E30] to-[#35577D]">
                     <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -178,7 +178,7 @@
 
             <flux:dropdown position="top" align="end">
                 <button class="flex items-center gap-2 rounded-lg p-2 transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-xs font-bold text-white">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#141E30] to-[#35577D] text-xs font-bold text-white">
                         {{ auth()->user()->initials() }}
                     </div>
                 </button>
@@ -187,7 +187,7 @@
                     <flux:menu.radio.group>
                         <div class="p-2">
                             <div class="flex items-center gap-3 rounded-lg bg-slate-50 p-3 dark:bg-slate-800/50">
-                                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-sm font-bold text-white">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#141E30] to-[#35577D] text-sm font-bold text-white">
                                     {{ auth()->user()->initials() }}
                                 </div>
                                 <div class="flex-1">

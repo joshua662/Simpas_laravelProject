@@ -1,5 +1,5 @@
 <x-layouts.app :title="__('Dashboard')">
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-4 md:p-6">
+    <div class="min-h-screen p-4 md:p-6" style="background: linear-gradient(to bottom right, #141E30, #35577D);">
         <!-- Toast Notification Backdrop -->
         <div id="toastBackdrop" class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-sm transition-opacity"></div>
 
@@ -86,7 +86,7 @@
         <!-- Main Stats Cards -->
         <div class="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <!-- Total Events Card -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 p-6 shadow-xl shadow-blue-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/40">
+            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] to-[#35577D] p-6 shadow-xl shadow-[#141E30]/50/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40">
                 <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
@@ -120,7 +120,7 @@
             </button>
 
             <!-- In Progress Events Card -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 p-6 shadow-xl shadow-indigo-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/40">
+            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] to-[#35577D] p-6 shadow-xl shadow-[#141E30]/50/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40">
                 <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
@@ -289,7 +289,7 @@
                         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Add New Event</h2>
                         <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Create a new event to get started</p>
                     </div>
-                    <a href="{{ route('tasks.index') }}" class="hidden rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 md:block">
+                    <a href="{{ route('tasks.index') }}" class="hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 md:block">
                         Manage Tasks →
                     </a>
                 </div>
@@ -332,7 +332,7 @@
                         @enderror
                     </div>
                     <div class="md:col-span-2">
-                        <button type="submit" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-3 font-semibold text-white shadow-lg shadow-blue-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60">
+                        <button type="submit" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-8 py-3 font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                             <span class="relative z-10 flex items-center gap-2">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -495,7 +495,7 @@
 
                             @foreach ($events->getUrlRange($startPage, $endPage) as $page => $url)
                                 @if ($page == $currentPage)
-                                    <span class="flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-blue-500/50">
+                                    <span class="flex items-center justify-center rounded-lg bg-gradient-to-r from-[#141E30] to-[#35577D] px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-[#141E30]/50/50">
                                         {{ $page }}
                                     </span>
                                 @else
@@ -604,7 +604,7 @@
                     <button type="button" onclick="closeEditModal()" class="rounded-xl border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600">
                         Cancel
                     </button>
-                    <button type="submit" class="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/50 transition-all hover:shadow-xl hover:shadow-blue-500/60">
+                    <button type="submit" class="rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all hover:shadow-xl hover:shadow-[#141E30]/50/60">
                         Save Changes
                     </button>
                 </div>

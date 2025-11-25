@@ -31,6 +31,11 @@ class Event extends Model
      */
     public function getTaskCountAttribute(): int
     {
+        // Use already loaded relationship if available to avoid N+1 queries
+        if ($this->relationLoaded('tasks')) {
+            return $this->tasks->count();
+        }
+        
         return $this->tasks()->count();
     }
 }
