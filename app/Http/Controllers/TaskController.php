@@ -14,9 +14,8 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::with('event')->latest()->paginate(5);
-        $events = Event::all();
 
-        return view('tasks', compact('tasks', 'events'));
+        return view('tasks', compact('tasks'));
     }
 
     /**
@@ -28,7 +27,6 @@ class TaskController extends Controller
             'description' => 'required|string',
             'assigned_to' => 'required|string|max:255',
             'due_date' => 'required|date',
-            'event_id' => 'nullable|exists:events,id',
         ]);
 
         // Set title from description (truncate if too long for title field)
@@ -50,7 +48,6 @@ class TaskController extends Controller
             'description' => 'required|string',
             'assigned_to' => 'required|string|max:255',
             'due_date' => 'required|date',
-            'event_id' => 'nullable|exists:events,id',
         ]);
 
         // Set title from description (truncate if too long for title field)

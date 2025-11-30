@@ -332,6 +332,18 @@
                         @enderror
                     </div>
                     <div class="md:col-span-2">
+                        <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Event (Optional)</label>
+                        <select name="task_id" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:border-blue-400">
+                            <option value="">N/A - Unassigned</option>
+                            @foreach($unassignedTasks as $task)
+                                <option value="{{ $task->id }}" {{ old('task_id') == $task->id ? 'selected' : '' }}>{{ $task->description }} - {{ $task->assigned_to }}</option>
+                            @endforeach
+                        </select>
+                        @error('task_id') 
+                            <p class="mt-2 text-xs font-medium text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="md:col-span-2">
                         <button type="submit" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-8 py-3 font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                             <span class="relative z-10 flex items-center gap-2">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -418,7 +430,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <button onclick="openEditModal({{ $event->id }}, '{{ addslashes($event->title) }}', '{{ $event->status }}', '{{ $event->date ? $event->date->format('Y-m-d') : '' }}', '{{ addslashes($event->location ?? '') }}')" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
+                                    <button onclick="openEditModal({{ $event->id }}, '{{ addslashes($event->title) }}', '{{ $event->status }}', '{{ $event->date ? $event->date->format('Y-m-d') : '' }}', '{{ addslashes($event->location ?? '') }}', {{ $event->tasks->first()->id ?? 'null' }})" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
                                         <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
@@ -600,6 +612,15 @@
                     <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Location</label>
                     <input type="text" id="edit_location" name="location" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
                 </div>
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Event (Optional)</label>
+                    <select id="edit_task_id" name="task_id" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
+                        <option value="">N/A - Unassigned (Remove Task)</option>
+                        @foreach($allTasks as $task)
+                            <option value="{{ $task->id }}" data-event-id="{{ $task->event_id }}">{{ $task->description }} - {{ $task->assigned_to }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="flex justify-end gap-3 pt-4">
                     <button type="button" onclick="closeEditModal()" class="rounded-xl border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600">
                         Cancel
@@ -667,12 +688,39 @@
 
 
     <script>
-        function openEditModal(id, title, status, date, location) {
+        function openEditModal(id, title, status, date, location, taskId) {
             document.getElementById('editForm').action = `/events/${id}`;
             document.getElementById('edit_title').value = title;
             document.getElementById('edit_status').value = status;
             document.getElementById('edit_date').value = date;
             document.getElementById('edit_location').value = location;
+            
+            // Filter tasks dropdown to show only unassigned tasks + currently assigned task
+            const taskSelect = document.getElementById('edit_task_id');
+            const options = taskSelect.querySelectorAll('option');
+            options.forEach(option => {
+                if (option.value === '') {
+                    // Keep the "N/A - Unassigned" option
+                    option.style.display = 'block';
+                } else {
+                    const taskEventId = option.getAttribute('data-event-id');
+                    // Show if unassigned (null/empty) or if it's the currently assigned task
+                    const isUnassigned = !taskEventId || taskEventId === '' || taskEventId === 'null';
+                    const isCurrentTask = option.value == taskId;
+                    
+                    if (isUnassigned || isCurrentTask) {
+                        option.style.display = 'block';
+                        // Mark currently assigned task
+                        if (isCurrentTask && !option.textContent.includes('(Currently Assigned)')) {
+                            option.textContent = option.textContent + ' (Currently Assigned)';
+                        }
+                    } else {
+                        option.style.display = 'none';
+                    }
+                }
+            });
+            
+            document.getElementById('edit_task_id').value = taskId || '';
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editModal').classList.add('flex');
         }

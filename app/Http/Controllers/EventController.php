@@ -16,6 +16,12 @@ class EventController extends Controller
         $events = Event::with('tasks')->latest()->paginate(5);
         $totalEvents = Event::count();
         
+        // Get unassigned tasks for the dropdown in event creation form
+        $unassignedTasks = Task::whereNull('event_id')->get();
+        
+        // Get all tasks for edit form (to show currently assigned task)
+        $allTasks = Task::all();
+        
         // Use the new Task model methods
         $totalTasks = Task::count();
         $activeTasks = Task::getActiveTasksCount();
@@ -46,6 +52,8 @@ class EventController extends Controller
 
         return view('dashboard', compact(
             'events', 
+            'unassignedTasks',
+            'allTasks',
             'totalEvents', 
             'activeTasks', 
             'pendingEvents',
@@ -71,9 +79,20 @@ class EventController extends Controller
             'status' => 'required|in:pending,in_progress,completed,cancelled',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
+            'task_id' => 'nullable|exists:tasks,id',
         ]);
 
-        Event::create($validated);
+        $event = Event::create([
+            'title' => $validated['title'],
+            'status' => $validated['status'],
+            'date' => $validated['date'],
+            'location' => $validated['location'],
+        ]);
+
+        // Assign task to event if selected
+        if (!empty($validated['task_id'])) {
+            Task::where('id', $validated['task_id'])->update(['event_id' => $event->id]);
+        }
 
         return redirect()->route('dashboard')->with('success', 'Event created successfully.');
     }
@@ -88,9 +107,23 @@ class EventController extends Controller
             'status' => 'required|in:pending,in_progress,completed,cancelled',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
+            'task_id' => 'nullable|exists:tasks,id',
         ]);
 
-        $event->update($validated);
+        $event->update([
+            'title' => $validated['title'],
+            'status' => $validated['status'],
+            'date' => $validated['date'],
+            'location' => $validated['location'],
+        ]);
+
+        // Unassign current tasks from this event
+        Task::where('event_id', $event->id)->update(['event_id' => null]);
+
+        // Assign new task to event if selected
+        if (!empty($validated['task_id'])) {
+            Task::where('id', $validated['task_id'])->update(['event_id' => $event->id]);
+        }
 
         return redirect()->route('dashboard')->with('success', 'Event updated successfully.');
     }
