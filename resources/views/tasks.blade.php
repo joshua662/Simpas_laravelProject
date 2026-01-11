@@ -152,7 +152,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </div>
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or email" class="w-full rounded-xl pl-10 pr-4 py-3.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 shadow-lg hover:shadow-xl" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); backdrop-filter: blur(10px);">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or event" class="w-full rounded-xl pl-10 pr-4 py-3.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 shadow-lg hover:shadow-xl" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); backdrop-filter: blur(10px);">
                             @if(request('search'))
                                 <button type="button" onclick="document.querySelector('input[name=search]').value=''; document.getElementById('searchForm').submit();" class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                     <svg class="h-5 w-5 text-slate-400 hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
