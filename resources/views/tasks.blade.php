@@ -82,7 +82,7 @@
             </div>
             
             <div class="p-6">
-                <form action="{{ route('tasks.store') }}" method="POST" class="grid gap-6 md:grid-cols-2">
+                <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data" class="grid gap-6 md:grid-cols-2">
                     @csrf
                     <div class="md:col-span-2">
                         <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Description</label>
@@ -105,6 +105,14 @@
                             <p class="mt-2 text-xs font-medium text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div>
+                        <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Photo (Optional)</label>
+                        <input type="file" name="photo" accept="image/jpeg,image/jpg,image/png" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:border-purple-400">
+                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">JPG/PNG only, max 2MB</p>
+                        @error('photo') 
+                            <p class="mt-2 text-xs font-medium text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="md:col-span-2">
                         <button type="submit" class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-8 py-3 font-semibold text-white shadow-lg shadow-[#141E30]/50/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#141E30]/50/60">
                             <span class="relative z-10 flex items-center gap-2">
@@ -119,35 +127,132 @@
             </div>
         </div>
 
-        <!-- Tasks List Table -->
-        <div class="rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80">
+        <!-- Search, Filter & Export Section -->
+        <div class="mb-6 rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80">
             <div class="border-b border-slate-200/50 p-6 dark:border-slate-700/50">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Tasks List</h2>
-                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Manage all your tasks</p>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Tasks List</h2>
+                    <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Manage all your tasks</p>
+                </div>
             </div>
-            <div class="overflow-x-auto p-6">
+            <!-- Search and Filter Bar with Dark Blue-Grey Background -->
+            <div class="p-6" style="background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);">
+                <form id="searchForm" method="GET" action="{{ route('tasks.index') }}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Search Section -->
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-sm font-bold text-white">
+                            <svg class="h-4 w-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            Search
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or email" class="w-full rounded-xl pl-10 pr-4 py-3.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 shadow-lg hover:shadow-xl" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); backdrop-filter: blur(10px);">
+                            @if(request('search'))
+                                <button type="button" onclick="document.querySelector('input[name=search]').value=''; document.getElementById('searchForm').submit();" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <svg class="h-5 w-5 text-slate-400 hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- Filter by Event Section -->
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-sm font-bold text-white">
+                            <svg class="h-4 w-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            </svg>
+                            Filter by Event
+                        </label>
+                        <div class="relative">
+                            <select name="event_id" form="searchForm" class="w-full rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 appearance-none pr-10 shadow-lg hover:shadow-xl cursor-pointer" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); backdrop-filter: blur(10px); background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22 fill=%22none%22%3E%3Cpath d=%22M1 1L6 6L11 1%22 stroke=%22%23cbd5e1%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center;">
+                                <option value="" style="background: #1e293b; color: white;">All Events</option>
+                                <option value="unassigned" {{ request('event_id') == 'unassigned' ? 'selected' : '' }} style="background: #1e293b; color: white;">Unassigned</option>
+                                @foreach($events ?? [] as $event)
+                                    <option value="{{ $event->id }}" {{ request('event_id') == $event->id ? 'selected' : '' }} style="background: #1e293b; color: white;">{{ $event->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-3 mt-6 flex-wrap">
+                    <button type="submit" form="searchForm" class="group flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                        </svg>
+                        Apply Filters
+                    </button>
+                    <a href="{{ route('tasks.index') }}" class="group flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-slate-400/50 hover:border-slate-300 hover:bg-slate-700/30 text-white text-sm font-semibold transition-all duration-200 backdrop-blur-sm" style="background: rgba(30, 41, 59, 0.5);">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Clear
+                    </a>
+                    <a href="{{ route('tasks.export.pdf', request()->query()) }}" class="ml-auto group flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95" title="Export to PDF">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Export PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks List Table -->
+        <div class="rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80 border border-slate-200/50 dark:border-slate-700/50 animate-fade-in">
+            <div class="border-b border-slate-200/50 p-6 dark:border-slate-700/50 bg-gradient-to-r from-slate-50/50 to-transparent dark:from-slate-800/50">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <svg class="h-5 w-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        Tasks List
+                    </h2>
+                    <span class="inline-flex items-center gap-2 rounded-full bg-purple-100 px-4 py-2 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 shadow-sm">
+                        <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        {{ $tasks->total() }} Total
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-x-auto p-6 custom-scrollbar">
                 <table class="w-full">
                     <thead>
-                        <tr class="border-b border-slate-200 dark:border-slate-700">
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Description</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Assigned To</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Due Date</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Event</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Event Count</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Actions</th>
+                        <tr class="border-b-2 border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Photo</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Description</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Assigned To</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Due Date</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Event</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Event Count</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
                         @forelse($tasks as $task)
-                        <tr class="group transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                        <tr class="group transition-smooth hover:bg-slate-50/50 dark:hover:bg-slate-700/30 hover:shadow-sm animate-fade-in">
+                            <td class="px-6 py-4">
+                                @if($task->photo)
+                                    <img src="{{ Storage::url($task->photo) }}" alt="{{ $task->assigned_to }}" class="h-10 w-10 rounded-full object-cover">
+                                @else
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#141E30] to-[#35577D] text-xs font-bold text-white">
+                                        {{ strtoupper(substr($task->assigned_to, 0, 2)) }}
+                                    </div>
+                                @endif
+                            </td>
                             <td class="px-6 py-4">
                                 <div class="max-w-md font-medium text-slate-900 dark:text-white">{{ $task->description }}</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-2">
-                                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#141E30] to-[#35577D] text-xs font-bold text-white">
-                                        {{ strtoupper(substr($task->assigned_to, 0, 1)) }}
-                                    </div>
                                     <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ $task->assigned_to }}</span>
                                 </div>
                             </td>
@@ -183,14 +288,14 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <button onclick="openEditTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ addslashes($task->assigned_to) }}', '{{ $task->due_date ? $task->due_date->format('Y-m-d') : '' }}')" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
-                                        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <button onclick="openEditTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ addslashes($task->assigned_to) }}', '{{ $task->due_date ? $task->due_date->format('Y-m-d') : '' }}', {{ $task->event_id ?? 'null' }})" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 transition-smooth hover:bg-blue-100 hover:shadow-md hover:scale-105 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50 btn-press">
+                                        <svg class="h-3.5 w-3.5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                         Edit
                                     </button>
-                                    <button onclick="openDeleteTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ route('tasks.destroy', $task) }}')" class="group flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-red-50 to-rose-50 px-3 py-1.5 text-xs font-semibold text-red-700 transition-all hover:from-red-100 hover:to-rose-100 hover:shadow-md dark:from-red-900/30 dark:to-rose-900/30 dark:text-red-300 dark:hover:from-red-900/50 dark:hover:to-rose-900/50">
-                                        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <button onclick="openDeleteTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ route('tasks.destroy', $task) }}')" class="group flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-red-50 to-rose-50 px-3 py-2 text-xs font-semibold text-red-700 transition-smooth hover:from-red-100 hover:to-rose-100 hover:shadow-md hover:scale-105 dark:from-red-900/30 dark:to-rose-900/30 dark:text-red-300 dark:hover:from-red-900/50 dark:hover:to-rose-900/50 btn-press">
+                                        <svg class="h-3.5 w-3.5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                         Delete
@@ -200,7 +305,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center">
+                            <td colspan="7" class="px-6 py-12 text-center">
                                 <div class="mx-auto max-w-sm">
                                     <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -340,7 +445,7 @@
                 <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Edit Task</h3>
                 <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Update task information</p>
             </div>
-            <form id="editTaskForm" method="POST" class="space-y-5">
+            <form id="editTaskForm" method="POST" enctype="multipart/form-data" class="space-y-5">
                 @csrf
                 @method('PUT')
                 <div>
@@ -355,6 +460,11 @@
                     <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Due Date</label>
                     <input type="date" id="edit_due_date" name="due_date" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
                 </div>
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Photo (Optional)</label>
+                    <input type="file" id="edit_photo" name="photo" accept="image/jpeg,image/jpg,image/png" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
+                    <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">JPG/PNG only, max 2MB</p>
+                </div>
                 <div class="flex justify-end gap-3 pt-4">
                     <button type="button" onclick="closeEditTaskModal()" class="rounded-xl border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600">
                         Cancel
@@ -368,7 +478,7 @@
     </div>
 
     <script>
-        function openEditTaskModal(id, description, assignedTo, dueDate, eventId) {
+        function openEditTaskModal(id, description, assignedTo, dueDate) {
             document.getElementById('editTaskForm').action = `/tasks/${id}`;
             document.getElementById('edit_description').value = description;
             document.getElementById('edit_assigned_to').value = assignedTo;
@@ -426,8 +536,21 @@
             }
         }
 
-        // Auto-dismiss toasts after 5 seconds
+        // Handle Enter key in search input
         document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.querySelector('input[name="search"]');
+            
+            if (searchInput && searchForm) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        searchForm.submit();
+                    }
+                });
+            }
+
+            // Auto-dismiss toasts after 5 seconds
             const successToast = document.getElementById('successToast');
             const errorToast = document.getElementById('errorToast');
             const backdrop = document.getElementById('toastBackdrop');

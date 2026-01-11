@@ -12,14 +12,14 @@
 
             <!-- Logo/Brand Section -->
             <div class="mb-8 px-4 pt-6">
-                <a href="{{ route('dashboard') }}" class="group flex items-center gap-3 rounded-xl p-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-800" wire:navigate>
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30">
+                <a href="{{ route('dashboard') }}" class="group flex items-center gap-3 rounded-xl p-3 transition-smooth hover:bg-slate-100 dark:hover:bg-slate-800 hover:shadow-lg hover-lift" wire:navigate>
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] shadow-lg shadow-[#141E30]/50/30 group-hover:scale-110 transition-transform duration-300">
                         <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                     </div>
                     <div class="flex-1">
-                        <div class="font-bold text-slate-900 dark:text-white">Event Manager</div>
+                        <div class="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Event Manager</div>
                         <div class="text-xs text-slate-500 dark:text-slate-400">Management System</div>
                     </div>
                 </a>
@@ -31,24 +31,29 @@
                 $activeTasks = \App\Models\Task::getActiveTasksCount();
             @endphp
             <div class="mb-6 px-4">
-                <div class="rounded-xl bg-gradient-to-br from-[#141E30]/10 via-[#35577D]/10 to-[#141E30]/10 p-4 backdrop-blur-sm dark:from-[#141E30]/20 dark:via-[#35577D]/20 dark:to-[#141E30]/20">
+                <div class="rounded-xl bg-gradient-to-br from-[#141E30]/10 via-[#35577D]/10 to-[#141E30]/10 p-4 backdrop-blur-sm dark:from-[#141E30]/20 dark:via-[#35577D]/20 dark:to-[#141E30]/20 border border-slate-200/50 dark:border-slate-700/50 shadow-lg hover:shadow-xl transition-all duration-300 card-hover">
                     <div class="mb-3 flex items-center justify-between">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Quick Stats</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                            <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            Quick Stats
+                        </span>
                     </div>
                     <div class="space-y-3">
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 dark:hover:bg-white/5 transition-colors">
                             <div class="flex items-center gap-2">
-                                <div class="h-2 w-2 rounded-full bg-blue-500"></div>
-                                <span class="text-sm text-slate-700 dark:text-slate-300">Events</span>
+                                <div class="h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse-slow shadow-lg shadow-blue-500/50"></div>
+                                <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Events</span>
                             </div>
-                            <span class="text-sm font-bold text-slate-900 dark:text-white">{{ $totalEvents }}</span>
+                            <span class="text-sm font-bold text-slate-900 dark:text-white bg-blue-100 dark:bg-blue-900/30 px-2.5 py-1 rounded-lg">{{ $totalEvents }}</span>
                         </div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 dark:hover:bg-white/5 transition-colors">
                             <div class="flex items-center gap-2">
-                                <div class="h-2 w-2 rounded-full bg-emerald-500"></div>
-                                <span class="text-sm text-slate-700 dark:text-slate-300">Active Tasks</span>
+                                <div class="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse-slow shadow-lg shadow-emerald-500/50"></div>
+                                <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Active Tasks</span>
                             </div>
-                            <span class="text-sm font-bold text-slate-900 dark:text-white">{{ $activeTasks }}</span>
+                            <span class="text-sm font-bold text-slate-900 dark:text-white bg-emerald-100 dark:bg-emerald-900/30 px-2.5 py-1 rounded-lg">{{ $activeTasks }}</span>
                         </div>
                     </div>
                 </div>
@@ -63,9 +68,12 @@
                             :href="route('dashboard')" 
                             :current="request()->routeIs('dashboard')" 
                             wire:navigate
-                            class="group relative rounded-xl px-4 py-3 transition-all hover:bg-gradient-to-r hover:from-[#141E30]/20 hover:to-[#35577D]/20 dark:hover:from-[#141E30]/30 dark:hover:to-[#35577D]/30"
+                            class="group relative rounded-xl px-4 py-3 transition-smooth hover:bg-gradient-to-r hover:from-[#141E30]/20 hover:to-[#35577D]/20 dark:hover:from-[#141E30]/30 dark:hover:to-[#35577D]/30 hover:shadow-md hover-lift"
                         >
-                            <span class="font-medium">{{ __('Dashboard') }}</span>
+                            <span class="font-medium relative z-10">{{ __('Dashboard') }}</span>
+                            @if(request()->routeIs('dashboard'))
+                                <span class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-r-full"></span>
+                            @endif
                         </flux:navlist.item>
                         
                         <flux:navlist.item 
@@ -73,9 +81,25 @@
                             :href="route('tasks.index')" 
                             :current="request()->routeIs('tasks.*')" 
                             wire:navigate
-                            class="group relative rounded-xl px-4 py-3 transition-all hover:bg-gradient-to-r hover:from-[#141E30]/20 hover:to-[#35577D]/20 dark:hover:from-[#141E30]/30 dark:hover:to-[#35577D]/30"
+                            class="group relative rounded-xl px-4 py-3 transition-smooth hover:bg-gradient-to-r hover:from-[#141E30]/20 hover:to-[#35577D]/20 dark:hover:from-[#141E30]/30 dark:hover:to-[#35577D]/30 hover:shadow-md hover-lift"
                         >
-                            <span class="font-medium">{{ __('Tasks') }}</span>
+                            <span class="font-medium relative z-10">{{ __('Tasks') }}</span>
+                            @if(request()->routeIs('tasks.*'))
+                                <span class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-r-full"></span>
+                            @endif
+                        </flux:navlist.item>
+                        
+                        <flux:navlist.item 
+                            icon="trash" 
+                            :href="route('trash.index')" 
+                            :current="request()->routeIs('trash.*')" 
+                            wire:navigate
+                            class="group relative rounded-xl px-4 py-3 transition-smooth hover:bg-gradient-to-r hover:from-[#141E30]/20 hover:to-[#35577D]/20 dark:hover:from-[#141E30]/30 dark:hover:to-[#35577D]/30 hover:shadow-md hover-lift"
+                        >
+                            <span class="font-medium relative z-10">{{ __('Trash') }}</span>
+                            @if(request()->routeIs('trash.*'))
+                                <span class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-r-full"></span>
+                            @endif
                         </flux:navlist.item>
                     </flux:navlist.group>
                 </flux:navlist>
@@ -92,9 +116,12 @@
                             :href="route('settings.profile')" 
                             :current="request()->routeIs('settings.*')" 
                             wire:navigate
-                            class="rounded-xl px-4 py-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-800"
+                            class="group relative rounded-xl px-4 py-3 transition-smooth hover:bg-slate-100 dark:hover:bg-slate-800 hover:shadow-md hover-lift"
                         >
-                            <span class="font-medium">{{ __('Settings') }}</span>
+                            <span class="font-medium relative z-10">{{ __('Settings') }}</span>
+                            @if(request()->routeIs('settings.*'))
+                                <span class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-r-full"></span>
+                            @endif
                         </flux:navlist.item>
                     </flux:navlist.group>
                 </flux:navlist>
@@ -103,18 +130,18 @@
             <!-- User Profile Section -->
             <div class="border-t border-slate-200/50 px-4 py-4 dark:border-slate-700/50">
                 <flux:dropdown class="w-full" position="top" align="start">
-                    <button class="flex w-full items-center gap-3 rounded-xl p-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <button class="flex w-full items-center gap-3 rounded-xl p-3 transition-smooth hover:bg-slate-100 dark:hover:bg-slate-800 hover:shadow-lg hover-lift group">
                         <div class="relative">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] text-sm font-bold text-white shadow-lg">
+                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#141E30] to-[#35577D] text-sm font-bold text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 {{ auth()->user()->initials() }}
                             </div>
-                            <div class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-green-500 dark:border-slate-800"></div>
+                            <div class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-green-500 dark:border-slate-800 shadow-lg animate-pulse-slow"></div>
                         </div>
                         <div class="flex-1 text-left">
-                            <div class="text-sm font-semibold text-slate-900 dark:text-white">{{ auth()->user()->name }}</div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ auth()->user()->name }}</div>
                             <div class="text-xs text-slate-500 dark:text-slate-400">{{ \Illuminate\Support\Str::limit(auth()->user()->email, 20) }}</div>
                         </div>
-                        <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-5 w-5 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
@@ -206,6 +233,9 @@
                         </flux:menu.item>
                         <flux:menu.item :href="route('tasks.index')" icon="clipboard-document-list" wire:navigate>
                             {{ __('Tasks') }}
+                        </flux:menu.item>
+                        <flux:menu.item :href="route('trash.index')" icon="trash" wire:navigate>
+                            {{ __('Trash') }}
                         </flux:menu.item>
                         <flux:menu.item :href="route('settings.profile')" icon="cog-6-tooth" wire:navigate>
                             {{ __('Settings') }}

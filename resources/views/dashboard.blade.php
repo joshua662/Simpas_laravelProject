@@ -86,70 +86,91 @@
         <!-- Main Stats Cards -->
         <div class="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <!-- Total Events Card -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] to-[#35577D] p-6 shadow-xl shadow-[#141E30]/50/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40">
-                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
+            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] via-[#35577D] to-[#475569] p-6 shadow-xl shadow-[#141E30]/50/25 transition-smooth hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40 card-hover animate-scale-in">
+                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="absolute left-0 bottom-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-white/5"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
-                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm">
+                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </div>
                     </div>
-                    <p class="mb-1 text-sm font-medium text-blue-100">Total Events</p>
-                    <h3 class="text-4xl font-bold text-white">{{ $totalEvents }}</h3>
-                    <p class="mt-2 text-xs text-blue-100">All time events</p>
+                    <p class="mb-1 text-sm font-medium text-blue-100 flex items-center gap-2">
+                        <span class="h-1.5 w-1.5 rounded-full bg-white animate-pulse-slow"></span>
+                        Total Events
+                    </p>
+                    <h3 class="text-4xl font-bold text-white mb-1 group-hover:scale-110 transition-transform duration-300 inline-block">{{ $totalEvents }}</h3>
+                    <p class="mt-2 text-xs text-blue-100 opacity-90">All time events</p>
                 </div>
             </div>
 
             <!-- Active Tasks Card -->
-            <button onclick="openActiveTasksModal()" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 p-6 text-left shadow-xl shadow-emerald-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/40 cursor-pointer">
-                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
+            <button onclick="openActiveTasksModal()" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 p-6 text-left shadow-xl shadow-emerald-500/25 transition-smooth hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/40 cursor-pointer card-hover animate-scale-in btn-press" style="animation-delay: 0.1s;">
+                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="absolute left-0 bottom-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-white/5"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
-                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm">
+                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
                         </div>
                     </div>
-                    <p class="mb-1 text-sm font-medium text-emerald-100">Active Tasks</p>
-                    <h3 class="text-4xl font-bold text-white">{{ $activeTasks }}</h3>
-                    <p class="mt-2 text-xs text-emerald-100">Click to view details</p>
+                    <p class="mb-1 text-sm font-medium text-emerald-100 flex items-center gap-2">
+                        <span class="h-1.5 w-1.5 rounded-full bg-white animate-pulse-slow"></span>
+                        Active Tasks
+                    </p>
+                    <h3 class="text-4xl font-bold text-white mb-1 group-hover:scale-110 transition-transform duration-300 inline-block">{{ $activeTasks }}</h3>
+                    <p class="mt-2 text-xs text-emerald-100 opacity-90 flex items-center gap-1">
+                        <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                        </svg>
+                        Click to view details
+                    </p>
                 </div>
             </button>
 
             <!-- In Progress Events Card -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] to-[#35577D] p-6 shadow-xl shadow-[#141E30]/50/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40">
-                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
+            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#141E30] via-[#35577D] to-[#475569] p-6 shadow-xl shadow-[#141E30]/50/25 transition-smooth hover:scale-105 hover:shadow-2xl hover:shadow-[#141E30]/50/40 card-hover animate-scale-in" style="animation-delay: 0.2s;">
+                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="absolute left-0 bottom-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-white/5"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
-                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm">
+                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                     </div>
-                    <p class="mb-1 text-sm font-medium text-indigo-100">In Progress Events</p>
-                    <h3 class="text-4xl font-bold text-white">{{ $inProgressEvents }}</h3>
-                    <p class="mt-2 text-xs text-indigo-100">Currently active events</p>
+                    <p class="mb-1 text-sm font-medium text-indigo-100 flex items-center gap-2">
+                        <span class="h-1.5 w-1.5 rounded-full bg-white animate-pulse-slow"></span>
+                        In Progress Events
+                    </p>
+                    <h3 class="text-4xl font-bold text-white mb-1 group-hover:scale-110 transition-transform duration-300 inline-block">{{ $inProgressEvents }}</h3>
+                    <p class="mt-2 text-xs text-indigo-100 opacity-90">Currently active events</p>
                 </div>
             </div>
 
             <!-- Pending Events Card -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500 via-orange-600 to-yellow-600 p-6 shadow-xl shadow-amber-500/25 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/40">
-                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10"></div>
+            <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500 via-orange-600 to-yellow-600 p-6 shadow-xl shadow-amber-500/25 transition-smooth hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/40 card-hover animate-scale-in" style="animation-delay: 0.3s;">
+                <div class="absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-white/10 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="absolute left-0 bottom-0 h-24 w-24 translate-y-6 -translate-x-6 rounded-full bg-white/5"></div>
                 <div class="relative z-10">
                     <div class="mb-4 flex items-center justify-between">
-                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm">
+                        <div class="rounded-xl bg-white/20 p-3 backdrop-blur-sm shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                     </div>
-                    <p class="mb-1 text-sm font-medium text-amber-100">Pending Events</p>
-                    <h3 class="text-4xl font-bold text-white">{{ $pendingEvents }}</h3>
-                    <p class="mt-2 text-xs text-amber-100">Awaiting start</p>
+                    <p class="mb-1 text-sm font-medium text-amber-100 flex items-center gap-2">
+                        <span class="h-1.5 w-1.5 rounded-full bg-white animate-pulse-slow"></span>
+                        Pending Events
+                    </p>
+                    <h3 class="text-4xl font-bold text-white mb-1 group-hover:scale-110 transition-transform duration-300 inline-block">{{ $pendingEvents }}</h3>
+                    <p class="mt-2 text-xs text-amber-100 opacity-90">Awaiting start</p>
                 </div>
             </div>
         </div>
@@ -157,8 +178,13 @@
         <!-- Status Breakdown & Quick Stats -->
         <div class="mb-8 grid gap-6 lg:grid-cols-3">
             <!-- Event Status Breakdown -->
-            <div class="rounded-2xl bg-white/80 backdrop-blur-xl p-6 shadow-xl dark:bg-slate-800/80">
-                <h3 class="mb-4 text-lg font-bold text-slate-900 dark:text-white">Event Status</h3>
+            <div class="rounded-2xl bg-white/80 backdrop-blur-xl p-6 shadow-xl dark:bg-slate-800/80 border border-slate-200/50 dark:border-slate-700/50 card-hover animate-fade-in custom-scrollbar">
+                <h3 class="mb-4 text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <svg class="h-5 w-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    Event Status
+                </h3>
                 <div class="space-y-4">
                     <div>
                         <div class="mb-2 flex items-center justify-between">
@@ -200,8 +226,13 @@
             </div>
 
             <!-- Task Distribution -->
-            <div class="rounded-2xl bg-white/80 backdrop-blur-xl p-6 shadow-xl dark:bg-slate-800/80">
-                <h3 class="mb-4 text-lg font-bold text-slate-900 dark:text-white">Task Distribution</h3>
+            <div class="rounded-2xl bg-white/80 backdrop-blur-xl p-6 shadow-xl dark:bg-slate-800/80 border border-slate-200/50 dark:border-slate-700/50 card-hover animate-fade-in" style="animation-delay: 0.1s;">
+                <h3 class="mb-4 text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <svg class="h-5 w-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    Task Distribution
+                </h3>
                 <div class="space-y-6">
                     <div class="flex items-center justify-between rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 dark:from-blue-900/20 dark:to-indigo-900/20">
                         <div class="flex items-center gap-3">
@@ -246,10 +277,15 @@
             </div>
 
             <!-- Upcoming Events -->
-            <div class="rounded-2xl bg-white/80 backdrop-blur-xl p-6 shadow-xl dark:bg-slate-800/80">
+            <div class="rounded-2xl bg-white/80 backdrop-blur-xl p-6 shadow-xl dark:bg-slate-800/80 border border-slate-200/50 dark:border-slate-700/50 card-hover animate-fade-in custom-scrollbar" style="animation-delay: 0.2s;">
                 <div class="mb-4 flex items-center justify-between">
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Upcoming Events</h3>
-                    <span class="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">Next 7 Days</span>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <svg class="h-5 w-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Upcoming Events
+                    </h3>
+                    <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 shadow-sm">Next 7 Days</span>
                 </div>
                 <div class="space-y-3">
                     @forelse($upcomingEvents as $event)
@@ -282,21 +318,29 @@
         </div>
 
         <!-- Event Management Section -->
-        <div class="mb-6 rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80">
-            <div class="border-b border-slate-200/50 p-6 dark:border-slate-700/50">
-                <div class="flex items-center justify-between">
+        <div class="mb-6 rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80 border border-slate-200/50 dark:border-slate-700/50 animate-fade-in">
+            <div class="border-b border-slate-200/50 p-6 dark:border-slate-700/50 bg-gradient-to-r from-slate-50/50 to-transparent dark:from-slate-800/50">
+                <div class="flex items-center justify-between flex-wrap gap-4">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Add New Event</h2>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Add New Event
+                        </h2>
                         <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Create a new event to get started</p>
                     </div>
-                    <a href="{{ route('tasks.index') }}" class="hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:scale-105 md:block">
-                        Manage Tasks →
+                    <a href="{{ route('tasks.index') }}" class="hidden rounded-xl bg-gradient-to-r from-[#141E30] to-[#35577D] px-4 py-2 text-sm font-semibold text-white shadow-lg transition-smooth hover:scale-105 hover:shadow-xl md:flex items-center gap-2 btn-press">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        Manage Tasks
                     </a>
                 </div>
             </div>
             
             <div class="p-6">
-                <form action="{{ route('events.store') }}" method="POST" class="grid gap-6 md:grid-cols-2">
+                <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data" class="grid gap-6 md:grid-cols-2">
                     @csrf
                     <div>
                         <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Event Title</label>
@@ -331,6 +375,14 @@
                             <p class="mt-2 text-xs font-medium text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div>
+                        <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Photo (Optional)</label>
+                        <input type="file" name="photo" accept="image/jpeg,image/jpg,image/png" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:border-blue-400">
+                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">JPG/PNG only, max 2MB</p>
+                        @error('photo') 
+                            <p class="mt-2 text-xs font-medium text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="md:col-span-2">
                         <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Event (Optional)</label>
                         <select name="task_id" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:focus:border-blue-400">
@@ -357,34 +409,123 @@
             </div>
         </div>
 
-        <!-- Events List Table -->
-        <div class="rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80">
+        <!-- Search, Filter & Export Section -->
+        <div class="mb-6 rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80">
             <div class="border-b border-slate-200/50 p-6 dark:border-slate-700/50">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">All Events</h2>
+                    <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Manage all your events</p>
+                </div>
+            </div>
+            <!-- Search and Filter Bar with Dark Blue-Grey Background -->
+            <div class="p-6" style="background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);">
+                <form id="searchForm" method="GET" action="{{ route('dashboard') }}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Search Section -->
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-sm font-bold text-white">
+                            <svg class="h-4 w-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            Search
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by title or location..." class="w-full rounded-xl pl-10 pr-4 py-3.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-lg hover:shadow-xl" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); backdrop-filter: blur(10px);">
+                            @if(request('search'))
+                                <button type="button" onclick="document.querySelector('input[name=search]').value=''; document.getElementById('searchForm').submit();" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <svg class="h-5 w-5 text-slate-400 hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- Filter by Status Section -->
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-sm font-bold text-white">
+                            <svg class="h-4 w-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            </svg>
+                            Filter by Status
+                        </label>
+                        <div class="relative">
+                            <select name="status" form="searchForm" class="w-full rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 appearance-none pr-10 shadow-lg hover:shadow-xl cursor-pointer" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); backdrop-filter: blur(10px); background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22 fill=%22none%22%3E%3Cpath d=%22M1 1L6 6L11 1%22 stroke=%22%23cbd5e1%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center;">
+                                <option value="" style="background: #1e293b; color: white;">All Statuses</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }} style="background: #1e293b; color: white;">Pending</option>
+                                <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }} style="background: #1e293b; color: white;">In Progress</option>
+                                <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }} style="background: #1e293b; color: white;">Completed</option>
+                                <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }} style="background: #1e293b; color: white;">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-3 mt-6 flex-wrap">
+                    <button type="submit" form="searchForm" class="group flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                        </svg>
+                        Apply Filters
+                    </button>
+                    <a href="{{ route('dashboard') }}" class="group flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-slate-400/50 hover:border-slate-300 hover:bg-slate-700/30 text-white text-sm font-semibold transition-all duration-200 backdrop-blur-sm" style="background: rgba(30, 41, 59, 0.5);">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Clear
+                    </a>
+                    <a href="{{ route('events.export.pdf', request()->query()) }}" class="ml-auto group flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95" title="Export to PDF">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Export PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events List Table -->
+        <div class="rounded-2xl bg-white/80 backdrop-blur-xl shadow-2xl dark:bg-slate-800/80 border border-slate-200/50 dark:border-slate-700/50 animate-fade-in">
+            <div class="border-b border-slate-200/50 p-6 dark:border-slate-700/50 bg-gradient-to-r from-slate-50/50 to-transparent dark:from-slate-800/50">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">All Events</h2>
-                        <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Manage all your events</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">{{ $totalEvents }} Total</span>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-xs font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 shadow-sm">
+                            <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            {{ $totalEvents }} Total
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="overflow-x-auto p-6">
+            <div class="overflow-x-auto p-6 custom-scrollbar">
                 <table class="w-full">
                     <thead>
-                        <tr class="border-b border-slate-200 dark:border-slate-700">
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Title</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Status</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Date</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Location</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Tasks</th>
-                            <th class="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Actions</th>
+                        <tr class="border-b-2 border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Photo</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Title</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Status</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Date</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Location</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Tasks</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
                         @forelse($events as $event)
-                        <tr class="group transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                        <tr class="group transition-smooth hover:bg-slate-50/50 dark:hover:bg-slate-700/30 hover:shadow-sm animate-fade-in">
+                            <td class="px-6 py-4">
+                                @if($event->photo)
+                                    <img src="{{ Storage::url($event->photo) }}" alt="{{ $event->title }}" class="h-10 w-10 rounded-full object-cover">
+                                @else
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#141E30] to-[#35577D] text-xs font-bold text-white">
+                                        {{ strtoupper(substr($event->title, 0, 2)) }}
+                                    </div>
+                                @endif
+                            </td>
                             <td class="px-6 py-4">
                                 <div class="font-semibold text-slate-900 dark:text-white">{{ $event->title }}</div>
                             </td>
@@ -429,15 +570,15 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <button onclick="openEditModal({{ $event->id }}, '{{ addslashes($event->title) }}', '{{ $event->status }}', '{{ $event->date ? $event->date->format('Y-m-d') : '' }}', '{{ addslashes($event->location ?? '') }}', {{ $event->tasks->first()->id ?? 'null' }})" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition-all hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50">
-                                        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex items-center gap-2">
+                                    <button onclick="openEditModal({{ $event->id }}, '{{ addslashes($event->title) }}', '{{ $event->status }}', '{{ $event->date ? $event->date->format('Y-m-d') : '' }}', '{{ addslashes($event->location ?? '') }}', {{ $event->tasks->first()->id ?? 'null' }})" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 transition-smooth hover:bg-blue-100 hover:shadow-md hover:scale-105 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50 btn-press">
+                                        <svg class="h-3.5 w-3.5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                         Edit
                                     </button>
-                                    <button onclick="openDeleteEventModal({{ $event->id }}, '{{ addslashes($event->title) }}', {{ $event->task_count }}, '{{ route('events.destroy', $event) }}')" class="group flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-red-50 to-rose-50 px-3 py-1.5 text-xs font-semibold text-red-700 transition-all hover:from-red-100 hover:to-rose-100 hover:shadow-md dark:from-red-900/30 dark:to-rose-900/30 dark:text-red-300 dark:hover:from-red-900/50 dark:hover:to-rose-900/50">
-                                        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <button onclick="openDeleteEventModal({{ $event->id }}, '{{ addslashes($event->title) }}', {{ $event->task_count }}, '{{ route('events.destroy', $event) }}')" class="group flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-red-50 to-rose-50 px-3 py-2 text-xs font-semibold text-red-700 transition-smooth hover:from-red-100 hover:to-rose-100 hover:shadow-md hover:scale-105 dark:from-red-900/30 dark:to-rose-900/30 dark:text-red-300 dark:hover:from-red-900/50 dark:hover:to-rose-900/50 btn-press">
+                                        <svg class="h-3.5 w-3.5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                         Delete
@@ -447,7 +588,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center">
+                            <td colspan="7" class="px-6 py-12 text-center">
                                 <div class="mx-auto max-w-sm">
                                     <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -551,10 +692,10 @@
     </div>
 
     <!-- Delete Event Confirmation Modal -->
-    <div id="deleteEventModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
-        <div class="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl dark:bg-slate-800">
+    <div id="deleteEventModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+        <div class="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl dark:bg-slate-800 border border-slate-200/50 dark:border-slate-700/50 animate-scale-in">
             <div class="text-center">
-                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30 shadow-lg">
                     <svg class="h-8 w-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
@@ -588,7 +729,7 @@
                 <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Edit Event</h3>
                 <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Update event information</p>
             </div>
-            <form id="editForm" method="POST" class="space-y-5">
+            <form id="editForm" method="POST" enctype="multipart/form-data" class="space-y-5">
                 @csrf
                 @method('PUT')
                 <div>
@@ -611,6 +752,11 @@
                 <div>
                     <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Location</label>
                     <input type="text" id="edit_location" name="location" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Photo (Optional)</label>
+                    <input type="file" id="edit_photo" name="photo" accept="image/jpeg,image/jpg,image/png" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
+                    <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">JPG/PNG only, max 2MB</p>
                 </div>
                 <div>
                     <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Event (Optional)</label>
@@ -688,6 +834,21 @@
 
 
     <script>
+        // Handle Enter key in search input
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.querySelector('input[name="search"]');
+            
+            if (searchInput && searchForm) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        searchForm.submit();
+                    }
+                });
+            }
+        });
+
         function openEditModal(id, title, status, date, location, taskId) {
             document.getElementById('editForm').action = `/events/${id}`;
             document.getElementById('edit_title').value = title;
