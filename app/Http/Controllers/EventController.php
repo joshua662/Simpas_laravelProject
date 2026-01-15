@@ -163,10 +163,19 @@ class EventController extends Controller
             'location' => 'required|string|max:255',
             'task_id' => 'nullable|exists:tasks,id',
             'photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'remove_photo' => 'nullable|boolean',
         ]);
 
+        // Handle photo removal
+        if ($request->has('remove_photo') && $request->remove_photo == '1') {
+            // Delete old photo if exists
+            if ($event->photo && Storage::disk('public')->exists($event->photo)) {
+                Storage::disk('public')->delete($event->photo);
+            }
+            $validated['photo'] = null;
+        }
         // Handle photo upload
-        if ($request->hasFile('photo')) {
+        elseif ($request->hasFile('photo')) {
             // Delete old photo if exists
             if ($event->photo && Storage::disk('public')->exists($event->photo)) {
                 Storage::disk('public')->delete($event->photo);

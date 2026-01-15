@@ -116,6 +116,7 @@ class TaskController extends Controller
             'assigned_to' => 'required|string|max:255',
             'due_date' => 'required|date',
             'photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'remove_photo' => 'nullable|boolean',
         ]);
 
         // Set title from description (truncate if too long for title field)
@@ -123,8 +124,16 @@ class TaskController extends Controller
             ? substr($validated['description'], 0, 252) . '...' 
             : $validated['description'];
 
+        // Handle photo removal
+        if ($request->has('remove_photo') && $request->remove_photo == '1') {
+            // Delete old photo if exists
+            if ($task->photo && Storage::disk('public')->exists($task->photo)) {
+                Storage::disk('public')->delete($task->photo);
+            }
+            $validated['photo'] = null;
+        }
         // Handle photo upload
-        if ($request->hasFile('photo')) {
+        elseif ($request->hasFile('photo')) {
             // Delete old photo if exists
             if ($task->photo && Storage::disk('public')->exists($task->photo)) {
                 Storage::disk('public')->delete($task->photo);

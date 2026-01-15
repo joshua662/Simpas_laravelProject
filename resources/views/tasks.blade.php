@@ -240,11 +240,24 @@
                         @forelse($tasks as $task)
                         <tr class="group transition-smooth hover:bg-slate-50/50 dark:hover:bg-slate-700/30 hover:shadow-sm animate-fade-in">
                             <td class="px-6 py-4">
-                                @if($task->photo)
-                                    <img src="{{ Storage::url($task->photo) }}" alt="{{ $task->assigned_to }}" class="h-10 w-10 rounded-full object-cover">
+                                @php
+                                    $photoUrl = null;
+                                    if ($task->photo) {
+                                        if (Storage::disk('public')->exists($task->photo)) {
+                                            $photoUrl = asset('storage/' . $task->photo);
+                                        }
+                                    }
+                                @endphp
+                                @if($photoUrl)
+                                    <div class="relative">
+                                        <img src="{{ $photoUrl }}" alt="{{ $task->assigned_to }}" class="h-10 w-10 rounded-full object-cover border-2 border-slate-200 dark:border-slate-700" onerror="this.onerror=null; this.src=''; this.style.display='none'; this.parentElement.querySelector('.photo-fallback').style.display='flex';">
+                                        <div class="photo-fallback hidden h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#141E30] to-[#35577D] text-sm font-bold text-white">
+                                            {{ strtoupper(substr($task->assigned_to ?? 'A', 0, 1)) }}
+                                        </div>
+                                    </div>
                                 @else
-                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#141E30] to-[#35577D] text-xs font-bold text-white">
-                                        {{ strtoupper(substr($task->assigned_to, 0, 2)) }}
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#141E30] to-[#35577D] text-sm font-bold text-white">
+                                        {{ strtoupper(substr($task->assigned_to ?? 'A', 0, 1)) }}
                                     </div>
                                 @endif
                             </td>
@@ -288,7 +301,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <button onclick="openEditTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ addslashes($task->assigned_to) }}', '{{ $task->due_date ? $task->due_date->format('Y-m-d') : '' }}', {{ $task->event_id ?? 'null' }})" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 transition-smooth hover:bg-blue-100 hover:shadow-md hover:scale-105 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50 btn-press">
+                                    <button onclick="openEditTaskModal({{ $task->id }}, '{{ addslashes($task->description) }}', '{{ addslashes($task->assigned_to) }}', '{{ $task->due_date ? $task->due_date->format('Y-m-d') : '' }}', {{ $task->event_id ?? 'null' }}, '{{ $task->photo && Storage::disk('public')->exists($task->photo) ? asset('storage/' . $task->photo) : '' }}')" class="group flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 transition-smooth hover:bg-blue-100 hover:shadow-md hover:scale-105 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50 btn-press">
                                         <svg class="h-3.5 w-3.5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
@@ -462,8 +475,21 @@
                 </div>
                 <div>
                     <label class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-300">Photo (Optional)</label>
+                    <!-- Current Photo Preview -->
+                    <div id="currentPhotoPreview" class="mb-3 hidden">
+                        <p class="mb-2 text-xs text-slate-600 dark:text-slate-400">Current Photo:</p>
+                        <div class="flex items-center gap-3">
+                            <img id="currentPhotoImg" src="" alt="Current photo" class="h-16 w-16 rounded-full object-cover border-2 border-slate-300 dark:border-slate-600">
+                            <div class="flex-1">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="remove_photo" name="remove_photo" value="1" class="rounded border-slate-300 text-purple-600 focus:ring-purple-500 dark:border-slate-600 dark:bg-slate-700">
+                                    <span class="text-sm text-slate-700 dark:text-slate-300">Remove current photo</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <input type="file" id="edit_photo" name="photo" accept="image/jpeg,image/jpg,image/png" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
-                    <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">JPG/PNG only, max 2MB</p>
+                    <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">JPG/PNG only, max 2MB. Upload a new photo to replace the current one.</p>
                 </div>
                 <div class="flex justify-end gap-3 pt-4">
                     <button type="button" onclick="closeEditTaskModal()" class="rounded-xl border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600">
@@ -478,11 +504,30 @@
     </div>
 
     <script>
-        function openEditTaskModal(id, description, assignedTo, dueDate) {
+        function openEditTaskModal(id, description, assignedTo, dueDate, eventId, photoUrl) {
             document.getElementById('editTaskForm').action = `/tasks/${id}`;
             document.getElementById('edit_description').value = description;
             document.getElementById('edit_assigned_to').value = assignedTo;
             document.getElementById('edit_due_date').value = dueDate;
+            
+            // Handle photo preview
+            const photoPreview = document.getElementById('currentPhotoPreview');
+            const photoImg = document.getElementById('currentPhotoImg');
+            const removePhotoCheckbox = document.getElementById('remove_photo');
+            const photoInput = document.getElementById('edit_photo');
+            
+            if (photoUrl && photoUrl.trim() !== '') {
+                photoImg.src = photoUrl;
+                photoPreview.classList.remove('hidden');
+                removePhotoCheckbox.checked = false;
+            } else {
+                photoPreview.classList.add('hidden');
+                removePhotoCheckbox.checked = false;
+            }
+            
+            // Reset file input
+            photoInput.value = '';
+            
             document.getElementById('editTaskModal').classList.remove('hidden');
             document.getElementById('editTaskModal').classList.add('flex');
         }
@@ -495,6 +540,29 @@
         document.getElementById('editTaskModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeEditTaskModal();
+            }
+        });
+
+        // Handle remove photo checkbox
+        document.getElementById('remove_photo')?.addEventListener('change', function(e) {
+            const photoPreview = document.getElementById('currentPhotoPreview');
+            const photoInput = document.getElementById('edit_photo');
+            if (e.target.checked) {
+                photoPreview.classList.add('hidden');
+                photoInput.disabled = true;
+            } else {
+                photoPreview.classList.remove('hidden');
+                photoInput.disabled = false;
+            }
+        });
+
+        // Handle new photo file selection
+        document.getElementById('edit_photo')?.addEventListener('change', function(e) {
+            const removeCheckbox = document.getElementById('remove_photo');
+            if (e.target.files && e.target.files[0]) {
+                removeCheckbox.checked = false;
+                const photoPreview = document.getElementById('currentPhotoPreview');
+                photoPreview.classList.add('hidden');
             }
         });
 

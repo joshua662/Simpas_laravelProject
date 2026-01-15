@@ -6,11 +6,13 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Helpers\\SearchFilterHelper' => $baseDir . '/app/Helpers/SearchFilterHelper.php',
     'App\\Helpers\\TaskHelper' => $baseDir . '/app/Helpers/TaskHelper.php',
     'App\\Http\\Controllers\\Auth\\VerifyEmailController' => $baseDir . '/app/Http/Controllers/Auth/VerifyEmailController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\EventController' => $baseDir . '/app/Http/Controllers/EventController.php',
     'App\\Http\\Controllers\\TaskController' => $baseDir . '/app/Http/Controllers/TaskController.php',
+    'App\\Http\\Controllers\\TrashController' => $baseDir . '/app/Http/Controllers/TrashController.php',
     'App\\Livewire\\Actions\\Logout' => $baseDir . '/app/Livewire/Actions/Logout.php',
     'App\\Livewire\\Auth\\ConfirmPassword' => $baseDir . '/app/Livewire/Auth/ConfirmPassword.php',
     'App\\Livewire\\Auth\\ForgotPassword' => $baseDir . '/app/Livewire/Auth/ForgotPassword.php',
